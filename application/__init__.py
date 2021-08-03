@@ -40,8 +40,8 @@ def init_app():
     with app.app_context():
         from application.models import actors, movies
         from application import routes
-        from application.artist_bp.routes import artist_bp
-        app.register_blueprint(artist_bp)
+        from application.actor_bp.routes import actor_bp
+        app.register_blueprint(actor_bp)
         app.jinja_env.filters['datetime'] = format_datetime
 
         if not app.debug:
