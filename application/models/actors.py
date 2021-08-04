@@ -13,22 +13,37 @@ class Actor(db.Model):
     phone = db.Column(db.String(120))
     image_link = db.Column(db.String(500))
     imdb_link = db.Column(db.String(120))
-    website = db.Column(db.String(120))
-    appearance = db.relationship('Cast', backref='cast_actor', lazy=True, cascade="all, delete-orphan")
 
-    def data(self):
-        data = {
+    def __init__(self, name, gender, age, phone, image_link, imdb_link):
+        self.name = name,
+        self.gender = gender,
+        self.age = age,
+        self.phone = phone,
+        self.image_link = image_link,
+        self.imdb_link = imdb_link
+
+    def format(self):
+        return {
             "id": self.id,
             "name": self.name,
             "gender": self.gender,
-            "age": format_datetime(str(self.start_time)),
+            "age": format_datetime(str(self.age)),
             "phone": self.phone,
-            "website": self.website,
             "imdb_link": self.imdb_link,
             "image_link": self.image_link
         }
-        return data
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
     def __repr__(self):
         return '<Actor %r>' % self
-
