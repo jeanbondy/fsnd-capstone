@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, abort
 from application.models.actors import Actor
 from application.models.movies import Movie
-from application.templates.forms import *
 from application import db
+from application.auth.auth import requires_auth
 import sys
+import logging
 
 actor_bp = Blueprint('actor_bp', __name__)
 
@@ -11,7 +12,8 @@ actor_bp = Blueprint('actor_bp', __name__)
 #  All Actors
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors', methods=['GET'])
-def actors():
+@requires_auth('get:actors')
+def actors(jwt):
     # pagination
     page = request.args.get('page', 1, type=int)
     start = (page - 1) * 10
@@ -32,7 +34,8 @@ def actors():
 #  Search Actor
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/search', methods=['POST'])
-def search_actor():
+@requires_auth('get:actors')
+def search_actor(jwt):
     request_body = request.get_json()
     if not request_body:
         abort(400)
@@ -55,7 +58,8 @@ def search_actor():
 #  Actor by ID
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/<int:actor_id>', methods=['GET'])
-def actor_by_id(actor_id):
+@requires_auth('get:actors')
+def actor_by_id(jwt, actor_id):
     actor = Actor.query.filter_by(id=actor_id).one_or_none()
     if actor is None:
         abort(404)
@@ -68,7 +72,8 @@ def actor_by_id(actor_id):
 #  Create Actor
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors', methods=['POST'])
-def create_actor():
+@requires_auth('post:actors')
+def create_actor(jwt):
     request_body = request.get_json()
     if not request_body:
         abort(400)
@@ -94,7 +99,8 @@ def create_actor():
 #  Delete Actor
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/<actor_id>', methods=['DELETE'])
-def delete_actor(actor_id):
+@requires_auth('delete:actors')
+def delete_actor(jwt, actor_id):
     actor = Actor.query.filter_by(id=actor_id).one_or_none()
     if actor is None:
         abort(404)
@@ -112,7 +118,8 @@ def delete_actor(actor_id):
 #  Update
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/<int:actor_id>/edit', methods=['PATCH'])
-def edit_actor(actor_id):
+@requires_auth('patch:actors')
+def edit_actor(jwt, actor_id):
 
     request_body = request.get_json()
     if not request_body:
