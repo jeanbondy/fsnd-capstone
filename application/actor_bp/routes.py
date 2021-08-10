@@ -96,6 +96,7 @@ def create_actor(jwt):
         db.session.close()
 
 
+
 #  Delete Actor
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/<actor_id>', methods=['DELETE'])
