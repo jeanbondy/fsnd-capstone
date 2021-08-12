@@ -1,34 +1,50 @@
 from dotenv import load_dotenv
+from os import environ, path
 import os
 import logging
 
-load_dotenv()
-ENV = os.environ.get('ENV')
+ENV = environ.get('ENV')
 
 # Grabs the folder where the script runs.
-basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = path.abspath(path.dirname(__file__))
+load_dotenv(path.join(basedir, '.env'))
 
-# Enable debug mode.
-
-
-# Connect to the database
 
 class Config:
     # Flask
-    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     SECRET_KEY = os.urandom(32)
     DEBUG = False
-    AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
-    ALGORITHMS = os.environ.get('ALGORITHMS')
-    API_AUDIENCE = os.environ.get('API_AUDIENCE')
+
+    # Database
+    SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Auth0
+    AUTH0_DOMAIN = environ.get('AUTH0_DOMAIN')
+    ALGORITHMS = environ.get('ALGORITHMS')
+    API_AUDIENCE = environ.get('API_AUDIENCE')
+
+    # Auth0 Tokens
+    JWT_EXEC_PROD = environ.get('JWT_EXEC_PROD')
+    JWT_CAST_DIR = environ.get('JWT_CAST_DIR')
+    JWT_CAST_ASSIST = environ.get('JWT_CAST_ASSIST')
+
 
 class ProductionConfig(Config):
-    pass
+    FLASK_ENV = 'production'
+    SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
+    DEBUG = False
+    TESTING = False
 
 
 class DevelopmentConfig(Config):
+    FLASK_ENV = 'development'
+    SQLALCHEMY_ECHO = True
     DEBUG = True
+    TESTING = True
 
 
 class TestingConfig(Config):
+    FLASK_ENV = 'development'
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = environ.get('TEST_DATABASE_URI')
