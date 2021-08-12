@@ -16,7 +16,7 @@ class Config:
     DEBUG = False
 
     # Database
-    SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Auth0
@@ -32,7 +32,7 @@ class Config:
 
 class ProductionConfig(Config):
     FLASK_ENV = 'production'
-    SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL')
     DEBUG = False
     TESTING = False
 
