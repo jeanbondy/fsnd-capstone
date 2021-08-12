@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from application.models.actors import Actor
 from application.models.movies import Movie
 from application import db
+from application.auth.auth import requires_auth
 import sys
 
 movie_bp = Blueprint('movie_bp', __name__)
@@ -10,7 +11,8 @@ movie_bp = Blueprint('movie_bp', __name__)
 #  All Movies
 #  ----------------------------------------------------------------
 @movie_bp.route('/movies', methods=['GET'])
-def movies():
+@requires_auth('get:movies')
+def movies(jwt):
     # pagination
     page = request.args.get('page', 1, type=int)
     start = (page - 1) * 10
@@ -31,7 +33,8 @@ def movies():
 #  Search Movie
 #  ----------------------------------------------------------------
 @movie_bp.route('/movies/search', methods=['POST'])
-def search_movie():
+@requires_auth('get:movies')
+def search_movie(jwt):
     request_body = request.get_json()
     if not request_body:
         abort(400)
@@ -54,25 +57,28 @@ def search_movie():
 #  Movie by ID
 #  ----------------------------------------------------------------
 @movie_bp.route('/movies/<int:movie_id>', methods=['GET'])
-def movie_by_id(movie_id):
+@requires_auth('get:movies')
+def movie_by_id(jwt, movie_id):
     movie = Movie.query.filter_by(id=movie_id).one_or_none()
     if movie is None:
         abort(404)
     else:
         return jsonify({
             'success': True,
+            'totalMovies': len([movie]),
             'movies': [movie.format()]}), 200
 
 
 #  Create Movie
 #  ----------------------------------------------------------------
 @movie_bp.route('/movies', methods=['POST'])
-def create_movie():
+@requires_auth('post:movies')
+def create_movie(jwt):
     request_body = request.get_json()
     if not request_body:
         abort(400)
     # check if all fields are included in the request
-    if not {'title', 'release_date', 'image_link', 'imdb_link'}.issuperset(set(request_body)):
+    if not {'title', 'release_date', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
     new_movie = Movie(title=request_body['title'],
                       release_date=request_body['release_date'],
@@ -80,7 +86,11 @@ def create_movie():
                       imdb_link=request_body['imdb_link'])
     try:
         new_movie.insert()
-        return jsonify({'success': True}), 200
+        return jsonify({
+            'success': True,
+            'totalMovies': len([new_movie]),
+            'movies': [new_movie.format()]}), 201
+
     except:
         db.session.rollback()
         abort(422)
@@ -91,7 +101,8 @@ def create_movie():
 #  Delete Movie
 #  ----------------------------------------------------------------
 @movie_bp.route('/movies/<movie_id>', methods=['DELETE'])
-def delete_movie(movie_id):
+@requires_auth('delete:movies')
+def delete_movie(jwt, movie_id):
     movie = Movie.query.filter_by(id=movie_id).one_or_none()
     if movie is None:
         abort(404)
@@ -109,7 +120,8 @@ def delete_movie(movie_id):
 #  Update
 #  ----------------------------------------------------------------
 @movie_bp.route('/movies/<int:movie_id>/edit', methods=['PATCH'])
-def edit_movie(movie_id):
+@requires_auth('patch:movies')
+def edit_movie(jwt, movie_id):
 
     request_body = request.get_json()
     if not request_body:
@@ -119,7 +131,7 @@ def edit_movie(movie_id):
         abort(404)
 
     # check if all fields are included in the request
-    if not {'title', 'release_date', 'image_link', 'imdb_link'}.issuperset(set(request_body)):
+    if not {'title', 'release_date', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
     edited_movie.title = request_body['title']
     edited_movie.release_date = request_body['release_date']
@@ -128,6 +140,7 @@ def edit_movie(movie_id):
     try:
         edited_movie.update()
         return jsonify({'success': True,
+                        'totalMovies': len([edited_movie]),
                         'movies': [edited_movie.format()]}), 200
     except:
         db.session.rollback()
