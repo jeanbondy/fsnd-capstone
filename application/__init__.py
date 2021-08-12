@@ -5,11 +5,13 @@ import logging
 from logging import FileHandler, Formatter
 import dateutil.parser
 import babel.dates
-from flask import Flask
+from flask import Flask, jsonify
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import config
+from application.auth.auth import AuthError
+
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -38,7 +40,8 @@ def init_app():
     moment.init_app(app)
 
     with app.app_context():
-        from application.models import actors, movies
+        from application.models.actors import Actor
+        from application.models.movies import Movie
         from application import routes
         from application.actor_bp.routes import actor_bp
         from application.movie_bp.routes import movie_bp
@@ -55,6 +58,54 @@ def init_app():
             file_handler.setLevel(logging.INFO)
             app.logger.addHandler(file_handler)
             app.logger.info('errors')
+
+        @app.errorhandler(400)
+        def bad_request(error):
+            return jsonify({
+                'success': False,
+                'error': '400',
+                'message': 'bad request'
+            }), 400
+
+        @app.errorhandler(404)
+        def not_found(error):
+            return jsonify({
+                'success': False,
+                'error': '404',
+                'message': 'resource not found'
+            }), 404
+
+        @app.errorhandler(405)
+        def not_allowed(error):
+            return jsonify({
+                'success': False,
+                'error': '405',
+                'message': 'method not allowed'
+            }), 405
+
+        @app.errorhandler(422)
+        def unprocessable(error):
+            return jsonify({
+                'success': False,
+                'error': '405',
+                'message': 'unprocessable'
+            }), 405
+
+        @app.errorhandler(500)
+        def server_error(error):
+            return jsonify({
+                'success': False,
+                'error': '500',
+                'message': 'server error'
+            })
+
+        @app.errorhandler(AuthError)
+        def handle_auth_error(e):
+            return jsonify({
+                "success": False,
+                "error": e.status_code,
+                'message': e.error
+            }), e.status_code
 
         return app
 
