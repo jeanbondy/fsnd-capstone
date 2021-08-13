@@ -39,6 +39,9 @@ def init_app():
     migrate.init_app(app, db)
     moment.init_app(app)
 
+    ogg = app.config['SQLALCHEMY_DATABASE_URI']
+    print(f'database {ogg}')
+
     with app.app_context():
         from application.models.actors import Actor
         from application.models.movies import Movie
@@ -58,6 +61,7 @@ def init_app():
             file_handler.setLevel(logging.INFO)
             app.logger.addHandler(file_handler)
             app.logger.info('errors')
+
 
         @app.errorhandler(400)
         def bad_request(error):
