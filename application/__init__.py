@@ -49,7 +49,7 @@ def init_app():
     with app.app_context():
         from application.models.actors import Actor
         from application.models.movies import Movie
-        from application import routes
+        from . import routes
         from application.actor_bp.routes import actor_bp
         from application.movie_bp.routes import movie_bp
         app.register_blueprint(actor_bp)

@@ -31,13 +31,14 @@ class Config:
 
 class ProductionConfig(Config):
     FLASK_ENV = 'production'
-    SQLALCHEMY_DATABASE_URI = environ.get('XATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL').replace("postgres://", "postgresql://", 1)
     DEBUG = False
     TESTING = False
 
 
 class DevelopmentConfig(Config):
     FLASK_ENV = 'development'
+    SQLALCHEMY_DATABASE_URI = environ.get('XATABASE_URL')
     SQLALCHEMY_ECHO = True
     DEBUG = True
     TESTING = True
