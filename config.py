@@ -18,7 +18,7 @@ class Config:
     # Database
     uri = os.getenv("DATABASE_URL")  # or other relevant config var
 
-    SQLALCHEMY_DATABASE_URI = uri.replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = 'pstgresql://blabla'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Auth0
