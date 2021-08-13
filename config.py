@@ -16,9 +16,6 @@ class Config:
     DEBUG = False
 
     # Database
-    uri = os.getenv("DATABASE_URL")  # or other relevant config var
-
-    SQLALCHEMY_DATABASE_URI = 'pstgresql://blabla'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Auth0
@@ -34,7 +31,7 @@ class Config:
 
 class ProductionConfig(Config):
     FLASK_ENV = 'production'
-    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = environ.get('XATABASE_URL')
     DEBUG = False
     TESTING = False
 
