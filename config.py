@@ -16,7 +16,9 @@ class Config:
     DEBUG = False
 
     # Database
-    SQLALCHEMY_DATABASE_URI = environ.get('XATABASE_URL').replace('postgres:', 'postgresql:')
+    uri = os.getenv("DATABASE_URL")  # or other relevant config var
+
+    SQLALCHEMY_DATABASE_URI = uri.replace("postgres://", "postgresql://", 1)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Auth0
