@@ -16,7 +16,8 @@ class Config:
     DEBUG = False
 
     # Database
-    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL').replace('postgres:', 'postgresql:')
+    #SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL').replace('postgres:', 'postgresql:')
+    SQLALCHEMY_DATABASE_URI = "postgresql://gccjzxxtvourkb:0a15173608421a5f5c42af9e2e8f47368427ba51f0d6578155bca9561e57755b@ec2-52-211-158-144.eu-west-1.compute.amazonaws.com:5432/d8helf3nn2hu3h"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Auth0
