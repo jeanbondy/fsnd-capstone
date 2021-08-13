@@ -66,6 +66,7 @@ def actor_by_id(jwt, actor_id):
     else:
         return jsonify({
             'success': True,
+            'totalActors': len([actor]),
             'actors': [actor.format()]}), 200
 
 
@@ -78,7 +79,7 @@ def create_actor(jwt):
     if not request_body:
         abort(400)
     # check if all fields are included in the request
-    if not {'name', 'gender', 'age', 'phone', 'image_link', 'imdb_link'}.issuperset(set(request_body)):
+    if not {'name', 'gender', 'age', 'phone', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
     new_actor = Actor(name=request_body['name'],
                       gender=request_body['gender'],
@@ -88,7 +89,10 @@ def create_actor(jwt):
                       imdb_link=request_body['imdb_link'])
     try:
         new_actor.insert()
-        return jsonify({'success': True}), 200
+        return jsonify({'success': True,
+                        'totalActors': len([new_actor]),
+                        'actors': [new_actor.format()]
+                        }), 201
     except:
         db.session.rollback()
         abort(422)
@@ -130,7 +134,7 @@ def edit_actor(jwt, actor_id):
         abort(404)
 
     # check if all fields are included in the request
-    if not {'name', 'gender', 'age', 'phone', 'image_link', 'imdb_link'}.issuperset(set(request_body)):
+    if not {'name', 'gender', 'age', 'phone', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
     actor.name = request_body['name']
     actor.gender = request_body['gender']
@@ -141,7 +145,8 @@ def edit_actor(jwt, actor_id):
     try:
         actor.update()
         return jsonify({'success': True,
-                        'actors': [actor.format()]}), 200
+                        'totalActors': len([actor]),
+                        'actors': [actor.format()]}), 201
     except:
         db.session.rollback()
         abort(422)
