@@ -11,7 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import config
 from application.auth.auth import AuthError
-
+from os import environ
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -40,7 +40,11 @@ def init_app():
     moment.init_app(app)
 
     ogg = app.config['SQLALCHEMY_DATABASE_URI']
+    ugg = environ.get('XATABASE_URL')
+    zog = environ.get('DATABASE_URL')
     print(f'database {ogg}')
+    print(f'xatabase_url {ugg}')
+    print(f'database_url {zog}')
 
     with app.app_context():
         from application.models.actors import Actor
