@@ -11,7 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import config
 from application.auth.auth import AuthError
-
+from os import environ
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -39,15 +39,13 @@ def init_app():
     migrate.init_app(app, db)
     moment.init_app(app)
 
-    ogg = app.config['SQLALCHEMY_DATABASE_URI']
-    print(f'database {ogg}')
-
     with app.app_context():
         from application.models.actors import Actor
         from application.models.movies import Movie
-        from application import routes
+        from application.home_bp.routes import home_bp
         from application.actor_bp.routes import actor_bp
         from application.movie_bp.routes import movie_bp
+        app.register_blueprint(home_bp)
         app.register_blueprint(actor_bp)
         app.register_blueprint(movie_bp)
         app.jinja_env.filters['datetime'] = format_datetime
