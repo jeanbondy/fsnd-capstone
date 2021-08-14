@@ -22,6 +22,7 @@ class Config:
     AUTH0_DOMAIN = environ.get('AUTH0_DOMAIN')
     ALGORITHMS = environ.get('ALGORITHMS')
     API_AUDIENCE = environ.get('API_AUDIENCE')
+    AUTH0_LOGIN_URL = f'https://{environ.get("AUTH0_DOMAIN")}/authorize?audience={environ.get("API_AUDIENCE")}&response_type=token&client_id={environ.get("AUTH0_CLIENT_ID")}&redirect_uri={environ.get("AUTH0_CALLBACK_URL")}'
 
     # Auth0 Tokens
     JWT_EXEC_PROD = environ.get('JWT_EXEC_PROD')
