@@ -9,4 +9,14 @@ def index():
     return "hello"
 
 
+@home_bp.route('/login')
+def login():
+    return "login"
+
+
+@home_bp.route('/callback')
+def callback():
+    return "callback"
+
+
 
