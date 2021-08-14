@@ -16,8 +16,13 @@ def login():
 
 @home_bp.route('/callback')
 def callback():
-    token = request.args.get('access_token', type=str)
-    return f'token {token}'
+    url = request.url
+    url_root = request.url_root
+    baseurl = request.base_url
+    path = request.path
+    full_path = request.full_path
+    stri = str(request.url_rule)
+    return f'url {url} url_root {url_root} baseurl {baseurl} path {path} full_path {full_path} stri {stri}'
 
 
 
