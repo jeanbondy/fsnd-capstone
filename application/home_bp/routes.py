@@ -1,4 +1,4 @@
-from flask import current_app as app
+from flask import current_app as app, redirect, request
 from flask import Blueprint
 
 home_bp = Blueprint('home_bp', __name__)
@@ -11,12 +11,13 @@ def index():
 
 @home_bp.route('/login')
 def login():
-    return "login"
+    return redirect(f'{app.config["AUTH0_LOGIN_URL"]}')
 
 
 @home_bp.route('/callback')
 def callback():
-    return "callback"
+    token = request.args.get('access_token', type=str)
+    return f'token {token}'
 
 
 

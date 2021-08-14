@@ -39,13 +39,6 @@ def init_app():
     migrate.init_app(app, db)
     moment.init_app(app)
 
-    ogg = app.config['SQLALCHEMY_DATABASE_URI']
-    ugg = environ.get('XATABASE_URL')
-    zog = environ.get('DATABASE_URL')
-    print(f'database {ogg}')
-    print(f'xatabase_url {ugg}')
-    print(f'database_url {zog}')
-
     with app.app_context():
         from application.models.actors import Actor
         from application.models.movies import Movie
