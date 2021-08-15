@@ -11,7 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import config
 from application.auth.auth import AuthError
-from os import environ
+from flask_cors import CORS
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -38,6 +38,7 @@ def init_app():
     db.init_app(app)
     migrate.init_app(app, db)
     moment.init_app(app)
+    CORS(app)
 
     with app.app_context():
         from application.models.actors import Actor
