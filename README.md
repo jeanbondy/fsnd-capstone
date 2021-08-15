@@ -124,10 +124,17 @@ These are the error types the API will return when requests fail:
 ## Endpoints
 
 ### GET /actors
-General:
-- Returns an object containing all actors, the total number of actors, and the success value.
-- Sample: `curl https://jb-capstone.herokuapp.com/actors`
+Returns an object containing all actors, the total number of actors, and the success value.
+Requires permission: get:actors
 
+| Role | Permission |
+| ------ | ------ |
+| Executive Producer | yes |
+| Casting Director | yes |
+| Casting Assistant | yes |
+| Public | no |
+
+Sample response:
 ```js
 {
     "actors": [
@@ -148,9 +155,14 @@ General:
 ```
 
 ### GET /actors/{id}
-General:
-- Returns a list with a single actor with the given id, the total number of actors, and the success value.
-- Sample: `curl https://jb-capstone.herokuapp.com/actors/1`
+Returns a list with a single actor with the given id, the total number of actors, and the success value.
+
+| Role | Permission |
+| ------ | ------ |
+| Executive Producer | yes |
+| Casting Director | yes |
+| Casting Assistant | yes |
+| Public | no |
 
 ```js
 {
@@ -172,8 +184,14 @@ General:
 
 
 ### POST /actors/search
-- Returns a list of actors, number of total actors and success value.
-- Sample: `curl https://jb-capstone.herokuapp.com/actors/search -X POST -H "Content-Type: application/json" -d {"searchTerm": "roger"}`
+Returns a list of actors, number of total actors and success value.
+
+| Role | Permission |
+| ------ | ------ |
+| Executive Producer | yes |
+| Casting Director | yes |
+| Casting Assistant | yes |
+| Public | no |
 
 Request body:
 ```js
@@ -202,8 +220,14 @@ Sample response:
 ```
 
 ### POST /actors
-- Creates a new question. Returns a success value.
-- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d {"question":  "What is the answer to everything", "answer":  "42", "difficulty": 1, "category": 1}`
+Creates a new question. Returns a success value.
+
+| Role | Permission |
+| ------ | ------ |
+| Executive Producer | yes |
+| Casting Director | yes |
+| Casting Assistant | no |
+| Public | no |
 
 Request body:
 ```js
@@ -239,6 +263,13 @@ Sample response:
 
 ### PATCH /actors/{id}
 
+| Role | Permission |
+| ------ | ------ |
+| Executive Producer | yes |
+| Casting Director | yes |
+| Casting Assistant | no |
+| Public | no |
+
 Sample request body:
 
 ```js
@@ -272,9 +303,14 @@ Sample response:
 ```
 
 ### DELETE /actors/{id}
-General:
-- Deletes  the question with the given ID, returns an object with "resource deleted" message and success value
-- Sample: `curl http://127.0.0.1:5000/questions/9 -X DELETE`
+Deletes  the question with the given ID, returns an object with "resource deleted" message and success value
+
+| Role | Permission |
+| ------ | ------ |
+| Executive Producer | yes |
+| Casting Director | yes |
+| Casting Assistant | no |
+| Public | no |
 
 Sample response:
 
