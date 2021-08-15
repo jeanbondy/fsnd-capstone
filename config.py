@@ -42,7 +42,7 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     FLASK_ENV = 'development'
-    SQLALCHEMY_DATABASE_URI = environ.get('XATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = environ.get('DEV_DATABASE_URI')
     SQLALCHEMY_ECHO = True
     DEBUG = True
     TESTING = True
