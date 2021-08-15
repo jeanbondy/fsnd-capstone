@@ -17,7 +17,7 @@ class Actor(db.Model):
     def __init__(self, name, gender, age, phone, image_link, imdb_link):
         self.name = name,
         self.gender = gender,
-        self.age = self.calculate_age(),
+        self.age = age,
         self.phone = phone,
         self.image_link = image_link,
         self.imdb_link = imdb_link
@@ -32,7 +32,6 @@ class Actor(db.Model):
             "id": self.id,
             "name": self.name,
             "gender": self.gender,
-            #"age": format_datetime(str(self.age)),
             "age": self.calculate_age(),
             "phone": self.phone,
             "imdb_link": self.imdb_link,
