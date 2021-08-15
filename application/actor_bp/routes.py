@@ -1,15 +1,19 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, abort
+# ----------------------------------------------------------------------------#
+# Imports
+# ----------------------------------------------------------------------------#
+from flask import Blueprint, request, jsonify, abort
 from application.models.actors import Actor
-from application.models.movies import Movie
 from application import db
 from application.auth.auth import requires_auth
-import sys
-import logging
 
+# Blueprint configuration
 actor_bp = Blueprint('actor_bp', __name__)
 
-
-#  All Actors
+#   ---------------------------------------------------------------
+#   GET list of all actors
+#   allowed roles: Executive Producer, Casting Director, Casting Assistant
+#   forbidden roles: none
+#   public access: forbidden
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors', methods=['GET'])
 @requires_auth('get:actors')
@@ -20,8 +24,9 @@ def actors(jwt):
     end = start + 10
     # query
     query = Actor.query.all()
+    # create list with actor objects of all query results
     actors = [actor.format() for actor in query]
-    # create response
+    # abort if there are no results
     if len(actors[start:end]) == 0:
         return abort(404)
     else:
@@ -31,18 +36,26 @@ def actors(jwt):
             'actors': actors[start:end]}), 200
 
 
-#  Search Actor
+#   ---------------------------------------------------------------
+#   GET search actors
+#   allowed roles: Executive Producer, Casting Director, Casting Assistant
+#   forbidden roles: none
+#   public access: forbidden
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/search', methods=['POST'])
 @requires_auth('get:actors')
 def search_actor(jwt):
     request_body = request.get_json()
+    # check if request body is present, aborts if not
     if not request_body:
         abort(400)
+    # check if 'searchTerm' is present, start search
     if 'searchTerm' in request_body:
         search_term = (request_body['searchTerm'])
         query = Actor.query.filter(Actor.name.ilike('%' + search_term + '%')).all()
+        # create list with actor objects of all query results
         actors = [actor.format() for actor in query]
+        # abort if no actor is found
         if len(query) == 0:
             abort(404)
         else:
@@ -51,15 +64,21 @@ def search_actor(jwt):
                 'totalActors': len(query),
                 'actors': actors
             }), 200
+    # abort if 'searchTerm' not present
     else:
         abort(400)
 
 
-#  Actor by ID
+#   ---------------------------------------------------------------
+#   GET actor by id
+#   allowed roles: Executive Producer, Casting Director, Casting Assistant
+#   forbidden roles: none
+#   public access: forbidden
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/<int:actor_id>', methods=['GET'])
 @requires_auth('get:actors')
 def actor_by_id(jwt, actor_id):
+    # Query by ID, returns actor object or none
     actor = Actor.query.filter_by(id=actor_id).one_or_none()
     if actor is None:
         abort(404)
@@ -70,15 +89,20 @@ def actor_by_id(jwt, actor_id):
             'actors': [actor.format()]}), 200
 
 
-#  Create Actor
+#   ---------------------------------------------------------------
+#   POST actor
+#   allowed roles: Executive Producer, Casting Director
+#   forbidden roles: Casting Assistant
+#   public access: forbidden
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors', methods=['POST'])
 @requires_auth('post:actors')
 def create_actor(jwt):
     request_body = request.get_json()
+    # check if request body is present, aborts if not
     if not request_body:
         abort(400)
-    # check if all fields are included in the request
+    # check if all required fields are included, abort if not
     if not {'name', 'gender', 'age', 'phone', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
     new_actor = Actor(name=request_body['name'],
@@ -100,12 +124,16 @@ def create_actor(jwt):
         db.session.close()
 
 
-
-#  Delete Actor
+#   ---------------------------------------------------------------
+#   DELETE actor
+#   allowed roles: Executive Producer, Casting Director
+#   forbidden roles: Casting Assistant
+#   public access: forbidden
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/<actor_id>', methods=['DELETE'])
 @requires_auth('delete:actors')
 def delete_actor(jwt, actor_id):
+    # Query by ID, returns actor object or none
     actor = Actor.query.filter_by(id=actor_id).one_or_none()
     if actor is None:
         abort(404)
@@ -120,22 +148,27 @@ def delete_actor(jwt, actor_id):
             db.session.close()
 
 
-#  Update
+#   ---------------------------------------------------------------
+#   PATCH actor
+#   allowed roles: Executive Producer, Casting Director
+#   forbidden roles: Casting Assistant
+#   public access: forbidden
 #  ----------------------------------------------------------------
 @actor_bp.route('/actors/<int:actor_id>/edit', methods=['PATCH'])
 @requires_auth('patch:actors')
 def edit_actor(jwt, actor_id):
-
+    # check if request body is present, abort if not
     request_body = request.get_json()
     if not request_body:
         abort(400)
+    # Query by ID, returns actor object or none
     actor = Actor.query.filter_by(id=actor_id).one_or_none()
     if actor is None:
         abort(404)
-
-    # check if all fields are included in the request
+    # check if all required fields are included in the request
     if not {'name', 'gender', 'age', 'phone', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
+    # replace object's values with values from request
     actor.name = request_body['name']
     actor.gender = request_body['gender']
     actor.age = request_body['age']
