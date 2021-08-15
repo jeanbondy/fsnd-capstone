@@ -106,10 +106,9 @@ def create_movie(jwt):
     # check if all required fields are included, abort if not
     if not {'title', 'release_date', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
-    new_movie = Movie(title=request_body['title'],
-                      release_date=request_body['release_date'],
-                      image_link=request_body['image_link'],
-                      imdb_link=request_body['imdb_link'])
+    # create an movie object with the parameters from request body
+    # Movie(**request_body) ** shorthand works when json fields are named like the model's parameters
+    new_movie = Movie(**request_body)
     try:
         new_movie.insert()
         return jsonify({
