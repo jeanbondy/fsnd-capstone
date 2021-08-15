@@ -5,6 +5,7 @@ from flask import Blueprint, request, jsonify, abort
 from application.models.actors import Actor
 from application import db
 from application.auth.auth import requires_auth
+from config import Config
 
 # Blueprint configuration
 actor_bp = Blueprint('actor_bp', __name__)
@@ -20,8 +21,8 @@ actor_bp = Blueprint('actor_bp', __name__)
 def actors(jwt):
     # pagination
     page = request.args.get('page', 1, type=int)
-    start = (page - 1) * 10
-    end = start + 10
+    start = (page - 1) * Config.PAGINATION
+    end = start + Config.PAGINATION
     # query
     query = Actor.query.all()
     # create list with actor objects of all query results
@@ -105,12 +106,9 @@ def create_actor(jwt):
     # check if all required fields are included, abort if not
     if not {'name', 'gender', 'age', 'phone', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
-    new_actor = Actor(name=request_body['name'],
-                      gender=request_body['gender'],
-                      age=request_body['age'],
-                      phone=request_body['phone'],
-                      image_link=request_body['image_link'],
-                      imdb_link=request_body['imdb_link'])
+    # create an actor object with the parameters from request body
+    # Actor(**request_body) ** shorthand works when json fields are named like the model's parameters
+    new_actor = Actor(**request_body)
     try:
         new_actor.insert()
         return jsonify({'success': True,

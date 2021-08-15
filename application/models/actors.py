@@ -1,6 +1,6 @@
 from application import db, format_datetime
-from flask import jsonify
-import datetime
+from datetime import datetime
+from datetime import date
 
 
 class Actor(db.Model):
@@ -22,12 +22,17 @@ class Actor(db.Model):
         self.image_link = image_link,
         self.imdb_link = imdb_link
 
+    def calculate_age(self):
+        today = date.today()
+        born = self.age
+        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
     def format(self):
         return {
             "id": self.id,
             "name": self.name,
             "gender": self.gender,
-            "age": format_datetime(str(self.age)),
+            "age": self.calculate_age(),
             "phone": self.phone,
             "imdb_link": self.imdb_link,
             "image_link": self.image_link
@@ -47,3 +52,4 @@ class Actor(db.Model):
 
     def __repr__(self):
         return '<Actor %r>' % self
+

@@ -43,8 +43,6 @@ def init_app():
 
     with app.app_context():
         # import parts of the Flask app
-        from application.models.actors import Actor
-        from application.models.movies import Movie
         from application.home_bp.routes import home_bp
         from application.actor_bp.routes import actor_bp
         from application.movie_bp.routes import movie_bp

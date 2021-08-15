@@ -5,6 +5,7 @@ from flask import Blueprint, request, jsonify, abort
 from application.models.movies import Movie
 from application import db
 from application.auth.auth import requires_auth
+from config import Config
 
 # Blueprint configuration
 movie_bp = Blueprint('movie_bp', __name__)
@@ -21,8 +22,8 @@ movie_bp = Blueprint('movie_bp', __name__)
 def movies(jwt):
     # pagination
     page = request.args.get('page', 1, type=int)
-    start = (page - 1) * 10
-    end = start + 10
+    start = (page - 1) * Config.PAGINATION
+    end = start + Config.PAGINATION
     # query
     query = Movie.query.all()
     # create list with movie objects of all query results
@@ -106,10 +107,9 @@ def create_movie(jwt):
     # check if all required fields are included, abort if not
     if not {'title', 'release_date', 'image_link', 'imdb_link'}.issubset(set(request_body)):
         abort(400)
-    new_movie = Movie(title=request_body['title'],
-                      release_date=request_body['release_date'],
-                      image_link=request_body['image_link'],
-                      imdb_link=request_body['imdb_link'])
+    # create an movie object with the parameters from request body
+    # Movie(**request_body) ** shorthand works when json fields are named like the model's parameters
+    new_movie = Movie(**request_body)
     try:
         new_movie.insert()
         return jsonify({
