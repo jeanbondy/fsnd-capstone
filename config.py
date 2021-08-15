@@ -29,6 +29,9 @@ class Config:
     JWT_CAST_DIR = environ.get('JWT_CAST_DIR')
     JWT_CAST_ASSIST = environ.get('JWT_CAST_ASSIST')
 
+    # App
+    PAGINATION = 10
+
 
 class ProductionConfig(Config):
     FLASK_ENV = 'production'

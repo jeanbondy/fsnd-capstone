@@ -5,6 +5,7 @@ from flask import Blueprint, request, jsonify, abort
 from application.models.movies import Movie
 from application import db
 from application.auth.auth import requires_auth
+from config import Config
 
 # Blueprint configuration
 movie_bp = Blueprint('movie_bp', __name__)
@@ -21,8 +22,8 @@ movie_bp = Blueprint('movie_bp', __name__)
 def movies(jwt):
     # pagination
     page = request.args.get('page', 1, type=int)
-    start = (page - 1) * 10
-    end = start + 10
+    start = (page - 1) * Config.PAGINATION
+    end = start + Config.PAGINATION
     # query
     query = Movie.query.all()
     # create list with movie objects of all query results
