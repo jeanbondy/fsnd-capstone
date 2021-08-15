@@ -17,13 +17,14 @@ from flask_cors import CORS
 # App Config.
 # ----------------------------------------------------------------------------#
 
-# Globally accessible libraries
+# globally accessible libraries
 db = SQLAlchemy()
 migrate = Migrate()
 moment = Moment()
 
 
 def init_app():
+    # create Flask app
     app = Flask(__name__)
 
     if config.ENV == "development":
@@ -41,16 +42,20 @@ def init_app():
     CORS(app)
 
     with app.app_context():
+        # import parts of the Flask app
         from application.models.actors import Actor
         from application.models.movies import Movie
         from application.home_bp.routes import home_bp
         from application.actor_bp.routes import actor_bp
         from application.movie_bp.routes import movie_bp
+
+        # register blueprints
         app.register_blueprint(home_bp)
         app.register_blueprint(actor_bp)
         app.register_blueprint(movie_bp)
         app.jinja_env.filters['datetime'] = format_datetime
 
+        # define logging format
         if not app.debug:
             file_handler = FileHandler('error.log')
             file_handler.setFormatter(
@@ -61,7 +66,9 @@ def init_app():
             app.logger.addHandler(file_handler)
             app.logger.info('errors')
 
-
+        # ----------------------------------------------------------------------------#
+        # Error handlers
+        # ----------------------------------------------------------------------------#
         @app.errorhandler(400)
         def bad_request(error):
             return jsonify({
@@ -112,10 +119,10 @@ def init_app():
 
         return app
 
-# ----------------------------------------------------------------------------#
-# Filters.
-# ----------------------------------------------------------------------------#
 
+# ----------------------------------------------------------------------------#
+# Format Datetime
+# ----------------------------------------------------------------------------#
 def format_datetime(value, date_format='medium'):
     date = dateutil.parser.parse(value)
     if date_format == 'full':
