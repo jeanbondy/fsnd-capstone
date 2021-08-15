@@ -123,156 +123,164 @@ These are the error types the API will return when requests fail:
 
 ## Endpoints
 
-### GET /categories
+### GET /actors
 General:
-- Returns an object containing all categories, and the success value.
-- Sample: `curl http://192.168.0.1:5000/categories`
+- Returns an object containing all actors, the total number of actors, and the success value.
+- Sample: `curl https://jb-capstone.herokuapp.com/actors`
 
 ```js
 {
-    "categories": {
-        "1": "Science",
-        "2": "Art",
-        "3": "Geography",
-        "4": "History",
-        "5": "Entertainment",
-        "6": "Sports"
-    },
-    "success": true
-}
-```
-
-### GET /categories/{id}/questions
-General:
-- Returns a list with question objects of the given category id, the current category, number of questions and the success value.
-- Sample: `curl http://192.168.0.1:5000/categories/3/questions`
-
-```js
-{
-    "currentCategory": "Geography",
-    "questions": [
+    "actors": [
         {
-            "answer": "Lake Victoria",
-            "category": 3,
-            "difficulty": 2,
-            "id": 13,
-            "question": "What is the largest lake in Africa?"
+            "age": 93,
+            "gender": "m",
+            "id": 1,
+            "image_link": "https://en.wikipedia.org/wiki/File:Roger_Moore_12_Allan_Warren.jpg",
+            "imdb_link": "https://www.imdb.com/name/nm0000549/",
+            "name": "Roger Moore",
+            "phone": "+44 12345678"
         },
-        {
-            "answer": "The Palace of Versailles",
-            "category": 3,
-            "difficulty": 3,
-            "id": 14,
-            "question": "In which royal palace would you find the Hall of Mirrors?"
-        }
-    ],
+        ...
+      ],
     "success": true,
-    "totalQuestions": 2
+    "totalActors": 4
 }
 ```
 
-### GET /questions
+### GET /actors/{id}
 General:
-- Returns an object containing all categories, success value, current category, number of total questions, and a list of question objects.
-- Supports pagination. A request without page parameter returns the first page.
-- Sample: `curl http://192.168.0.1:5000/questions?page=2`
+- Returns a list with a single actor with the given id, the total number of actors, and the success value.
+- Sample: `curl https://jb-capstone.herokuapp.com/actors/1`
 
 ```js
 {
-
-    "success": true,
-    "totalQuestions": 26,
-     "categories": {
-        "1": "Science",
-        "2": "Art",
-        "3": "Geography",
-        "4": "History",
-        "5": "Entertainment",
-        "6": "Sports"
-    },
-    "questions": [
+    "actors": [
         {
-            "answer": "One",
-            "category": 2,
-            "difficulty": 4,
-            "id": 18,
-            "question": "How many paintings did Van Gogh sell in his lifetime?"
-        }
-        ]
-    
-}
-```
-
-### POST /questions
-Search:
-- Returns a list of question objects, number of total questions and success value.
-- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d {"searchTerm": "hank"}`
-
-```js
-{
-    "success": true,
-    "questions": [
-        {
-            "answer": "Apollo 13",
-            "category": 5,
-            "difficulty": 4,
-            "id": 2,
-            "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+            "age": 93,
+            "gender": "m",
+            "id": 1,
+            "image_link": "https://en.wikipedia.org/wiki/File:Roger_Moore_12_Allan_Warren.jpg",
+            "imdb_link": "https://www.imdb.com/name/nm0000549/",
+            "name": "Roger Moore",
+            "phone": "+44 12345678"
         }
     ],
-    "totalQuestions": 1
+    "success": true,
+    "totalActors": 1
 }
 ```
 
-New Question:
+
+### POST /actors/search
+- Returns a list of actors, number of total actors and success value.
+- Sample: `curl https://jb-capstone.herokuapp.com/actors/search -X POST -H "Content-Type: application/json" -d {"searchTerm": "roger"}`
+
+Request body:
+```js
+{
+    "searchTerm": "roger"
+}
+```
+
+Sample response:
+```js
+{
+    "actors": [
+        {
+            "age": 93,
+            "gender": "m",
+            "id": 1,
+            "image_link": "https://en.wikipedia.org/wiki/File:Roger_Moore_12_Allan_Warren.jpg",
+            "imdb_link": "https://www.imdb.com/name/nm0000549/",
+            "name": "Roger Moore",
+            "phone": "+44 12345678"
+        }
+    ],
+    "success": true,
+    "totalActors": 1
+}
+```
+
+### POST /actors
 - Creates a new question. Returns a success value.
 - Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d {"question":  "What is the answer to everything", "answer":  "42", "difficulty": 1, "category": 1}`
 
+Request body:
 ```js
 {
-    "success": true
+    "name":  "George Lazenby",
+    "age":  "1939-09-05 00:00:00",
+    "gender": "m",
+    "phone": "+61 123 456789",
+    "imdb_link": "https://www.imdb.com/title/tt0064757/",
+    "image_link": "https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg"
 }
-
 ```
 
-### DELETE /questions/{id}
+Sample response:
+
+```js
+{
+    "actors": [
+        {
+            "age": 81,
+            "gender": "m",
+            "id": 9,
+            "image_link": "https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg",
+            "imdb_link": "https://www.imdb.com/title/tt0064757/",
+            "name": "George Lazenby",
+            "phone": "+61 123 456789"
+        }
+    ],
+    "success": true,
+    "totalActors": 1
+}
+```
+
+### PATCH /actors/{id}
+
+Sample request body:
+
+```js
+{
+    "name":  "George Lazenby",
+    "age":  "1939-09-05 00:00:00",
+    "gender": "m",
+    "phone": "+61 123 456789",
+    "imdb_link": "https://www.imdb.com/title/tt0064757/",
+    "image_link": "https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg"
+}
+```
+Sample response:
+
+```js
+{
+    "actors": [
+        {
+            "age": 81,
+            "gender": "m",
+            "id": 1,
+            "image_link": "https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg",
+            "imdb_link": "https://www.imdb.com/title/tt0064757/",
+            "name": "George Lazenby",
+            "phone": "+61 123 456789"
+        }
+    ],
+    "success": true,
+    "totalActors": 1
+}
+```
+
+### DELETE /actors/{id}
 General:
 - Deletes  the question with the given ID, returns an object with "resource deleted" message and success value
 - Sample: `curl http://127.0.0.1:5000/questions/9 -X DELETE`
 
+Sample response:
+
 ```js
 {
-    "message": "resource deleted",
     "success": true
 }
 ```
 
-### POST /quizzes
-General:
-- Deletes  the question with the given ID, returns an object with "resource deleted" message and success value
-- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d {"previous_questions": [1,4,20,15], "quiz_category": {"id": 1, "type": "science"}}`
-- - Request body: The request body consists of a list of ids of the previous questions, and an current category object.
-
-```js
-{
-    "previous_questions": [1,4,20,15],
-    "quiz_category": {
-        "id": 1,
-        "type": "science"
-    }
-}
-```
-The response is a success value and a single question object.
-```js
-{
-    "question": {
-        "answer": "Blood",
-        "category": 1,
-        "difficulty": 4,
-        "id": 22,
-        "question": "Hematology is a branch of medicine involving the study of what?"
-    },
-    "success": true
-}
-
-```
