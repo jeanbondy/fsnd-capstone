@@ -1,5 +1,8 @@
+# ----------------------------------------------------------------------------#
+# Imports
+# ----------------------------------------------------------------------------#
 from application import db, format_datetime
-from flask import jsonify
+
 
 class Movie(db.Model):
     __tablename__ = 'movies'
