@@ -1,30 +1,26 @@
 # FSND Final Project - Capstone
 
-### Getting started
+## Getting started
+These are the requirements to run the app or the unittests locally.
 
-1. **Python 3.9** - Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+### Prerequisites
+1. **Python 3.8 or higher** - Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
 
+2. **Postgres** - Follow the instructions to install the latest version of Postgres for your platform on [postgresql.org](https://www.postgresql.org/download/)
+
+### Get it running
+
+1. **Clone** the repository and open a terminal in the project's directory, likely `fsnd-capstone`.
 
 2. **Virtual Enviornment** - I recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
-
-3. **PIP Dependencies** - Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
+3. **PIP Dependencies** - Once you have your virtual environment setup and running, install dependencies by naviging to the `fsnd-capstone` directory and running:
 ```bash
 pip install -r requirements.txt
 ```
-This will install all of the required packages we selected within the `requirements.txt` file.
+This will install all of the required packages.
 
-
-4. **Key Dependencies**
- - [Flask](http://flask.pocoo.org/)  is a lightweight backend microservices framework. Flask is required to handle requests and responses.
-
- - [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the lightweight sqlite database. You'll primarily work in app.py and can reference models.py. 
-
- - [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server. 
-
-5. **Postgres** - Follow the instructions to install the latest version of Postgres for your platform on [postgresql.org](https://www.postgresql.org/download/)
-
-### Database Setup
+4. **Database Setup**
 With Postgres running, we'll start with a clean slate so that the results are not influenced by previous data. We delete existing databases, and create new databases.
 
 We assume the user to be the default user "postgres". If you want to use a different user, adapt the follwing commands accordingly.
@@ -49,32 +45,24 @@ createdb -U postgres capstone_test
 
 ```
 
-### Running the server
+5. **Setting environment variables**
+For your convenience, the repo includes a `setup.sh` that will set all required environment variables for you.
 
-Ensure you are working using your created virtual environment.
+| environment variable | value |  what is this |
+| ------ | ------ | ------ |
+| DATABASE_URL | --- | Production db, e.g. running on Heroku |
+| DEV_DATABASE_URI | postgresql://postgres@localhost:5432/capstone | local db for development |
+| TEST_DATABASE_URI | postgresql://postgres@localhost:5432/capstone_test | local db for testing |
+| ENV | development | Setting app either to testing, development or production |
+| AUTH0_DOMAIN | --- | Application domain as defined on auth0.com |
+| AUTH0_CLIENT_ID | --- | Client ID as defined on auth0.com |
+| AUTH0_CLIENT_SECRET | --- | Client as defined on auth0.com |
+| API_AUDIENCE | cell | API audience as defined on auth0.com |
+| AUTH0_CALLBACK_URL | https://jb-capstone.herokuapp.com/callback | calback URL configured on auth0|
+| JWT_EXEC_PROD | --- | jwt for Executive Producer role |
+| JWT_CAST_ASSIST | --- | jwt for Casting Assistant role |
+| JWT_CAST_DIR | --- | jwt for Casting Director role |
 
-#### Setting environment variables
-The app defaults to user 'postgres', no password and the url localhost:5432.
-
-You can set other values using these environment variables:
- - DATABASE_USER
- - DATABASE_PASSWORD
- - DATABASE_URL
-
-From the backend folder in terminal run:
-Windows:
-```bash
-set DATABASE_USER=youruser
-set DATABASE_USER=yourpassword
-set DATABASE_USER=yourdatabaseurl
-```
-
-Linux:
-```bash
-export DATABASE_USER=youruser
-export DATABASE_USER=yourpassword
-export DATABASE_USER=yourdatabaseurl
-```
 
 To run the server, execute in the same terminal:
 
