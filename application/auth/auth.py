@@ -9,8 +9,6 @@ from urllib.request import urlopen
 import logging
 from config import Config
 
-logging.basicConfig(level=logging.DEBUG)
-
 AUTH0_DOMAIN = Config.AUTH0_DOMAIN
 ALGORITHMS = Config.ALGORITHMS
 API_AUDIENCE = Config.API_AUDIENCE
@@ -53,7 +51,6 @@ def get_token_auth_header():
         }, 401)
 
     token = parts[1]
-    logging.debug(f'token: {token}')
     return token
 
 
