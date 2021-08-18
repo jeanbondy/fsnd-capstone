@@ -1,0 +1,15 @@
+export DATABASE_URL=postgres://postgres@localhost:5432/capstone
+export DEV_DATABASE_URI=postgresql://postgres@localhost:5432/capstone
+export TEST_DATABASE_URI=postgresql://postgres@localhost:5432/capstone_test
+export ENV=development
+export FLASK_APP=wsgi.py
+export FLASK_ENV=development
+export AUTH0_DOMAIN=dev-jb-fswd.eu.auth0.com
+export AUTH0_CLIENT_ID=y6RjmkbOgHmcE0UyXIAQTNZYTEbgAfTw
+export AUTH0_CLIENT_SECRET=DEAU25SGHWrt-9m5SQapKX7VFBKJiXq4r1EbO6IFQZ4qJxK6mHNELF5m7fx88x7p
+export ALGORITHMS=['RS256']
+export API_AUDIENCE=capstone-api
+export AUTH0_CALLBACK_URL=https://jb-capstone.herokuapp.com/callback
+export JWT_EXEC_PROD=
+export JWT_CAST_ASSIST=
+export JWT_CAST_DIR=
