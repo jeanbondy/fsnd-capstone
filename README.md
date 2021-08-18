@@ -32,6 +32,8 @@ These are the requirements to run the app or the unittests locally.
 
 4. **Flask-CORS** - Installed with the requirements.txt
 
+5. **Postman** - you can run and test the app without it, but I absolutely recommend using Postman to test the endpoints. Get Postman [here](https://www.postman.com/downloads/) and import the collection `capstone.postman_collection.json` from the project directory.
+
 ### Get it running
 
 1. **Clone** this repository and open a terminal in the project's directory, likely `fsnd-capstone`.
@@ -110,7 +112,7 @@ python -m unittest discover test
 When all tests are done, it's time to run the app locally.
 
 ### Running the app locally
-If you want, populate the database `capstone` with sample data:
+Populate the database `capstone` with sample data:
 
 ```bash
 psql capstone < capstone.psql
