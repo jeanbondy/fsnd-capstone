@@ -1,0 +1,1871 @@
+{
+	"info": {
+		"_postman_id": "1fd116c9-799d-487e-817e-69d02ae81d96",
+		"name": "capstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "executive producer",
+			"item": [
+				{
+					"name": "actors",
+					"item": [
+						{
+							"name": "actors",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get actor by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"searchTerm\": \"roger\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"response contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":  \"George Lazenby\",\r\n    \"age\":  \"1939-09-05\",\r\n    \"gender\": \"m\",\r\n    \"phone\": \"+61 123 456789\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0064757/\",\r\n    \"image_link\": \"https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"response contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":  \"George Robert Lazenby\",\r\n    \"age\":  \"1939-09-05\",\r\n    \"gender\": \"m\",\r\n    \"phone\": \"+61 123 456789\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0064757/\",\r\n    \"image_link\": \"https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors/5/edit",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"5",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete actor by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors/5",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt-executive_producer}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "movies",
+					"item": [
+						{
+							"name": "movies",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "movie by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"searchTerm\": \"live\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image_link\": \"https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5\",\r\n    \"release_date\": \"Wed 06, 27, 1973 12:00AM\",\r\n    \"title\": \"Live and Let Live\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies/1/edit",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"1",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image_link\": \"https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5\",\r\n    \"release_date\": \"Wed 06, 27, 1966 12:00AM\",\r\n    \"title\": \"From Russia with Love\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "movie by id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies/4",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt-executive_producer}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "casting director",
+			"item": [
+				{
+					"name": "actors",
+					"item": [
+						{
+							"name": "actors",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get actor by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"searchTerm\": \"roger\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"response contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":  \"George Lazenby\",\r\n    \"age\":  \"1939-09-05\",\r\n    \"gender\": \"m\",\r\n    \"phone\": \"+61 123 456789\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0064757/\",\r\n    \"image_link\": \"https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"response contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":  \"George Robert Lazenby\",\r\n    \"age\":  \"1939-09-05\",\r\n    \"gender\": \"m\",\r\n    \"phone\": \"+61 123 456789\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0064757/\",\r\n    \"image_link\": \"https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors/6/edit",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"6",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete actor by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors/6",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "movies",
+					"item": [
+						{
+							"name": "movies",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "movie by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"searchTerm\": \"live\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image_link\": \"https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5\",\r\n    \"release_date\": \"Wed 06, 27, 1973 12:00AM\",\r\n    \"title\": \"Live and Let Live\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies/1/edit",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"1",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(false);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image_link\": \"https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5\",\r\n    \"release_date\": \"Wed 06, 27, 1966 12:00AM\",\r\n    \"title\": \"From Russia with Love\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "movie by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(false);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies/5",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_casting_director}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "casting assistant",
+			"item": [
+				{
+					"name": "actors",
+					"item": [
+						{
+							"name": "actors",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get actor by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains actors array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.actors).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"searchTerm\": \"roger\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(false);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":  \"George Lazenby\",\r\n    \"age\":  \"1939-09-05 00:00:00\",\r\n    \"gender\": \"m\",\r\n    \"phone\": \"+61 123 456789\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0064757/\",\r\n    \"image_link\": \"https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors/4/edit",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"4",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new actor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(false);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":  \"George Lazenby\",\r\n    \"age\":  \"1939-09-05 00:00:00\",\r\n    \"gender\": \"m\",\r\n    \"phone\": \"+61 123 456789\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0064757/\",\r\n    \"image_link\": \"https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/actors",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete actor by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(false);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actors/3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actors",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "movies",
+					"item": [
+						{
+							"name": "movies",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "movie by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"value contains movies array\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.movies).to.be.an('array')\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"searchTerm\": \"live\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(false);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image_link\": \"https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5\",\r\n    \"release_date\": \"Wed 06, 27, 1973 12:00AM\",\r\n    \"title\": \"Live and Let Live\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies/1/edit",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"1",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new movie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(false);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image_link\": \"https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg\",\r\n    \"imdb_link\": \"https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5\",\r\n    \"release_date\": \"Wed 06, 27, 1966 12:00AM\",\r\n    \"title\": \"From Russia with Love\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/movies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "movie by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"success is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.success).to.eql(false);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/movies/4",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"movies",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_casting_assistant}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "https://jb-capstone.herokuapp.com"
+		},
+		{
+			"key": "jwt-executive_producer",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImRZV25iZjFNdS05Y250OEozTktidiJ9.eyJpc3MiOiJodHRwczovL2Rldi1qYi1mc3dkLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MTEyNjFlOTM0NTc5NjAwNzE2MDc4OTAiLCJhdWQiOiJjYXBzdG9uZS1hcGkiLCJpYXQiOjE2MjkzMDU2NzksImV4cCI6MTYyOTM3NzY3OSwiYXpwIjoieTZSam1rYk9nSG1jRTBVeVhJQVFUTlpZVEViZ0FmVHciLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6bW92aWVzIl19.fGH5lX37VQoTpmVis7wdQWOb95ZsO5D9jRNY7znBfV3lVPri99Zdj1NFp4WeiA2GcbNVaBRFFthuMTbHjsm2JatRLR_cfyFccm4pxeuGM8kV1S9HPa__kY3rd7gbsLLZQM5rBEVfpqQ--jSK3CsVEjFhXm-3wAuVjUOjnCsElSY9iRx4MXl_BbURDF15R_Lre1zCdgdmYfd0SO0FReNWWFG3h1ekRCl74sc2iqrswAT1eWkHydVzSqsPkyTg_gIt4H62XBNO-vU5E7D5EV4-KbRJiiPTKR2uHfM2DPGNveczMh5_vtaW3_fvT2HfIN_pZg_hzD8cZWr0rUc6paxk5A"
+		},
+		{
+			"key": "jwt_casting_director",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImRZV25iZjFNdS05Y250OEozTktidiJ9.eyJpc3MiOiJodHRwczovL2Rldi1qYi1mc3dkLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MGVlYzlkZWNmNzNjYzAwNzA1YjYwODAiLCJhdWQiOiJjYXBzdG9uZS1hcGkiLCJpYXQiOjE2MjkzMDU3NjIsImV4cCI6MTYyOTM3Nzc2MiwiYXpwIjoieTZSam1rYk9nSG1jRTBVeVhJQVFUTlpZVEViZ0FmVHciLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.GJ8ZnvU8TL0UQEZL4GBU6UnRuQ0-EXJm6ORK_Wg7y67z8dlJ4WU6GP4yuj06JwoSLkd_bOtyQwzdLpfOe-fNW5pglNqZB7VlfyUtmh105oVbIcUdZ17xwuVbFDu9LjiSf4lysv-YMPU9j2cOl0cmLKgaDJsXqt5CE_teWXqbcu9GsttUOM49vmQKiPLKr3tSBHz8WvDrAHBy_LlHd6UZe_6Ebz1Y5u-P4nw_9z5z7SegMC4PmAdbTWPkdKaUPnQPt6K_rWKCBJdhB6h6jpQEW7UAJrqOARklloc7v1CG9D1RcgFkjTuWEacOtTwjmQVj_rM0lTEz3CQ9qh9q6dtbNg"
+		},
+		{
+			"key": "jwt_casting_assistant",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImRZV25iZjFNdS05Y250OEozTktidiJ9.eyJpc3MiOiJodHRwczovL2Rldi1qYi1mc3dkLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MGVlYzk5NTQwYThmZDAwNzAxYTM2MjAiLCJhdWQiOiJjYXBzdG9uZS1hcGkiLCJpYXQiOjE2MjkzMDU4MTYsImV4cCI6MTYyOTM3NzgxNiwiYXpwIjoieTZSam1rYk9nSG1jRTBVeVhJQVFUTlpZVEViZ0FmVHciLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.KkPqs8p1J4hBjNuoIG8lrtEdvSMyiPr2pvMJ8WEGiZHMx8VOqjnNET23oOrfKRiFZ7rLO_RjsSEWxomU0_WnwD82O6oiJEKQRPs9giyQRYQun2BDoWN5cGg7UKGOfosqGCbhA77WlIYRCg-7-CxjOv42OtIbgWW-zDxDM8lrqdWpEBi-Ahb4zJBsK8q6bWV1L6e_ZO7K9FxYMhsSKpvzqbIoH2oNY9RLYqk-2Xtc-_Z1skZOluSEEdL_KT5W-g7WHug8AgBMtb7Wg-hdc2JJEWPHWe8G0iYnaVYopXD7_UUQuBfYCDglLTMLfiotV1tHighgHgykfeF5FM7hArgCiA"
+		}
+	]
+}
