@@ -112,10 +112,10 @@ python -m unittest discover test
 When all tests are done, it's time to run the app locally.
 
 ### Running the app locally
-Populate the database `capstone` with sample data:
+Populate the database `capstone` with sample data from `capstone.psql` from the project directory:
 
 ```bash
-psql capstone < capstone.psql
+psql -U postgres capstone < capstone.psql
 ```
 And then start the app
 ```bash
