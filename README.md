@@ -7,7 +7,7 @@ I hope you find my code useful!
 The app is, for the time being, live on [https://jb-capstone.herokuapp.com/](https://jb-capstone.herokuapp.com/) 
 
 ## Login
-For the review, I ssupplied fresh JWT tokens for each role. To get fresh tokens, follow these steps:
+For the review, I supplied fresh JWT tokens for each role. To get fresh tokens, follow these steps:
 
 [login](https://jb-capstone.herokuapp.com/login) with these credentials:
 | user | pwd | role |
