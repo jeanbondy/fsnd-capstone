@@ -1,6 +1,7 @@
 # FSND Final Project - Capstone
-This my submission for the final project for the Udacity FSND Nanodegree! I chose the suggested casting agency, to reduce complexity for me and focus on the given tasks.  
-I hope you find the code useful!
+This my submission for the final project for the Udacity FSND Nanodegree! I chose the suggested casting agency, to reduce complexity for me and focus on the given tasks. The course was a great learning experience, that I can highly recommend.  
+  
+I hope you find my code useful!
 
 ## Heroku URL
 The app is, for the time being, live on [https://jb-capstone.herokuapp.com/](https://jb-capstone.herokuapp.com/) 
