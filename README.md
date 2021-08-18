@@ -1,16 +1,39 @@
 # FSND Final Project - Capstone
+This my submission for the final project for the Udacity FSND Nanodegree! I chose the suggested casting agency, to reduce complexity for me and focus on the given tasks.  
+I hope you find the code useful!
+
+## Heroku URL
+The app is, for the time being, live on [https://jb-capstone.herokuapp.com/](https://jb-capstone.herokuapp.com/) 
+
+## Login
+For the review, I ssupplied fresh JWT tokens for each role. To get fresh tokens, follow these steps:
+
+[login](https://jb-capstone.herokuapp.com/login) with these credentials:
+| user | pwd | role |
+| ------ | ------ |
+| exe@exec.com | exe-Spring-Key | Executive Producer |
+| mag@mag.com | mag-Spring-Key | Casting Director |
+| bob@bob.com | bob-Spring-Key | Casting Assistant |
+
+On the callback page, grab the jwt token and paste it e.g. in the corresponding entry of the `setup.sh` file
+
+Other than testing the app, there's nothing that can be done with those credentials, that's why I'm comfortable sharing them here.
 
 ## Getting started
 These are the requirements to run the app or the unittests locally.
 
-### Prerequisites
+### Key dependencies
 1. **Python 3.8 or higher** - Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
 
 2. **Postgres** - Follow the instructions to install the latest version of Postgres for your platform on [postgresql.org](https://www.postgresql.org/download/)
 
+3. **Flask-SQLAlchemy** - Installed with the requirements.txt
+
+4. **Flask-CORS** - Installed with the requirements.txt
+
 ### Get it running
 
-1. **Clone** the repository and open a terminal in the project's directory, likely `fsnd-capstone`.
+1. **Clone** this repository and open a terminal in the project's directory, likely `fsnd-capstone`.
 
 2. **Virtual Enviornment** - I recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
@@ -23,7 +46,7 @@ This will install all of the required packages.
 4. **Database Setup**
 With Postgres running, we'll start with a clean slate so that the results are not influenced by previous data. We delete existing databases, and create new databases.
 
-We assume the user to be the default user "postgres". If you want to use a different user, adapt the follwing commands accordingly.
+For the local installation, I chose the default user `postgres` without a password. This is not recommended for production! If you want to use a different user and password, please adapt the entries in the `setup.sh` file.
 
 From the backend folder in terminal run:
 
@@ -46,7 +69,15 @@ createdb -U postgres capstone_test
 ```
 
 5. **Setting environment variables**
-For your convenience, the repo includes a `setup.sh` that will set all required environment variables for you.
+For your convenience, the repo includes a `setup.sh` that will set all required environment variables for you. To run `setup.sh`, open a terminal in the project directory:
+
+On Windows (requires git bash) and Linux:
+```bash
+source setup.sh
+```
+Note that you have to start flask from the same terminal in order for flask being able to access those variables.
+
+
 
 | environment variable | value |  what is this |
 | ------ | ------ | ------ |
@@ -62,26 +93,32 @@ For your convenience, the repo includes a `setup.sh` that will set all required 
 | JWT_EXEC_PROD | --- | jwt for Executive Producer role |
 | JWT_CAST_ASSIST | --- | jwt for Casting Assistant role |
 | JWT_CAST_DIR | --- | jwt for Casting Director role |
+| FLASK_APP |wsgi.py | tell Flask where the app is |
 
+6. **Testing**
 
-### Testing
-Now it's time to run the unittests to make sure everything works as expected.  
+Now it's time to run the unittests to make sure everything works as expected.   
 
-The unittests require the postgres database to be running and defined in the environment variable TEST_DATABASE_URI. If you ran the `setup.sh`, this has been taken care of. The tests deletes the tables, creates new tables and populates them with sample data for each role.  
+The unittests require the postgres database to be running and defined in the environment variable TEST_DATABASE_URI. If you ran the `setup.sh`, this has been taken care of. The tests deletes the tables, creates new tables and populates them with sample data.    
 The unittests call each endpoint for the roles public, executive producer, casting director and casting assistant.  
-To run the tests, make sure that the jwt for the all roles are valid, and run from the backend folder in terminal:
+To run the tests, make sure that the jwt for the all roles are valid, and run from the backend folder in terminal (same terminal you used to run `setup.sh`):
 
-On windows
 ```bash
 python -m unittest discover test
 ```
-
-On Linux
-```bash
-python -m unittest discover test
-```
+When all tests are done, it's time to run the app locally.
 
 ### Running the app locally
+If you want, populate the database `capstone` with sample data:
+
+```bash
+psql capstone < capstone.psql
+```
+And then start the app
+```bash
+flask run
+```
+I recommend poking the endpoints with Postman with the included `capstone.postman_collection.json`
 
 ## Error Handling
 
