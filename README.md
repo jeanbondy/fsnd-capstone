@@ -385,20 +385,18 @@ Requires permission: `get:movies`
 Sample response:
 ```js
 {
-    "actors": [
+    "movies": [
         {
-            "age": 93,
-            "gender": "m",
-            "id": 1,
-            "image_link": "https://en.wikipedia.org/wiki/File:Roger_Moore_12_Allan_Warren.jpg",
-            "imdb_link": "https://www.imdb.com/name/nm0000549/",
-            "name": "Roger Moore",
-            "phone": "+44 12345678"
+            "id": 2,
+            "image_link": "http://www.007museum.com/live_and_let_die_poster4.jpg",
+            "imdb_link": "https://www.imdb.com/title/tt0070328/",
+            "release_date": "Wed 06, 27, 1973 12:00AM",
+            "title": "Live and Let Die"
         },
         ...
       ],
     "success": true,
-    "totalActors": 4
+    "totalMovies": 4
 }
 ```
 
@@ -415,19 +413,18 @@ Requires permission: `get:movies`
 
 ```js
 {
-    "actors": [
+    "movies": [
         {
-            "age": 93,
-            "gender": "m",
-            "id": 1,
-            "image_link": "https://en.wikipedia.org/wiki/File:Roger_Moore_12_Allan_Warren.jpg",
-            "imdb_link": "https://www.imdb.com/name/nm0000549/",
-            "name": "Roger Moore",
-            "phone": "+44 12345678"
-        }
-    ],
+            "id": 2,
+            "image_link": "http://www.007museum.com/live_and_let_die_poster4.jpg",
+            "imdb_link": "https://www.imdb.com/title/tt0070328/",
+            "release_date": "Wed 06, 27, 1973 12:00AM",
+            "title": "Live and Let Die"
+        },
+        ...
+      ],
     "success": true,
-    "totalActors": 1
+    "totalMovies": 1
 }
 ```
 
@@ -446,26 +443,25 @@ Requires permission: `get:movies`
 Request body:
 ```js
 {
-    "searchTerm": "roger"
+    "searchTerm": "live"
 }
 ```
 
 Sample response:
 ```js
 {
-    "actors": [
+    "movies": [
         {
-            "age": 93,
-            "gender": "m",
-            "id": 1,
-            "image_link": "https://en.wikipedia.org/wiki/File:Roger_Moore_12_Allan_Warren.jpg",
-            "imdb_link": "https://www.imdb.com/name/nm0000549/",
-            "name": "Roger Moore",
-            "phone": "+44 12345678"
-        }
-    ],
+            "id": 2,
+            "image_link": "http://www.007museum.com/live_and_let_die_poster4.jpg",
+            "imdb_link": "https://www.imdb.com/title/tt0070328/",
+            "release_date": "Wed 06, 27, 1973 12:00AM",
+            "title": "Live and Let Die"
+        },
+        ...
+      ],
     "success": true,
-    "totalActors": 1
+    "totalMovies": 1
 }
 ```
 
@@ -483,12 +479,10 @@ Requires permission: `post:movies`
 Request body:
 ```js
 {
-    "name":  "George Lazenby",
-    "age":  "1939-09-05 00:00:00",
-    "gender": "m",
-    "phone": "+61 123 456789",
-    "imdb_link": "https://www.imdb.com/title/tt0064757/",
-    "image_link": "https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg"
+    "image_link": "https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg",
+    "imdb_link": "https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5",
+    "release_date": "Wed 06, 27, 1966 12:00AM",
+    "title": "From Russia with Love"
 }
 ```
 
@@ -496,19 +490,17 @@ Sample response:
 
 ```js
 {
-    "actors": [
+    "movies": [
         {
-            "age": 81,
-            "gender": "m",
-            "id": 9,
-            "image_link": "https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg",
-            "imdb_link": "https://www.imdb.com/title/tt0064757/",
-            "name": "George Lazenby",
-            "phone": "+61 123 456789"
+            "id": 7,
+            "image_link": "https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg",
+            "imdb_link": "https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5",
+            "release_date": "Mon 06, 27, 1966 12:00AM",
+            "title": "From Russia with Love"
         }
     ],
     "success": true,
-    "totalActors": 1
+    "totalMovies": 1
 }
 ```
 
@@ -527,31 +519,27 @@ Sample request body:
 
 ```js
 {
-    "name":  "George Lazenby",
-    "age":  "1939-09-05 00:00:00",
-    "gender": "m",
-    "phone": "+61 123 456789",
-    "imdb_link": "https://www.imdb.com/title/tt0064757/",
-    "image_link": "https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg"
+    "image_link": "https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg",
+    "imdb_link": "https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5",
+    "release_date": "Wed 06, 27, 1973 12:00AM",
+    "title": "Live and Let Live"
 }
 ```
 Sample response:
 
 ```js
 {
-    "actors": [
+    "movies": [
         {
-            "age": 81,
-            "gender": "m",
             "id": 1,
-            "image_link": "https://en.wikipedia.org/wiki/File:GeorgeLazenby11.14.08ByLuigiNovi.jpg",
-            "imdb_link": "https://www.imdb.com/title/tt0064757/",
-            "name": "George Lazenby",
-            "phone": "+61 123 456789"
+            "image_link": "https://upload.wikimedia.org/wikipedia/en/3/36/Live_and_Let_Die-_UK_cinema_poster.jpg",
+            "imdb_link": "https://www.imdb.com/title/tt0070328/?ref_=fn_al_tt_5",
+            "release_date": "Wed 06, 27, 1973 12:00AM",
+            "title": "Live and Let Live"
         }
     ],
     "success": true,
-    "totalActors": 1
+    "totalMovies": 1
 }
 ```
 
