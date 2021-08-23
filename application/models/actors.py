@@ -1,9 +1,9 @@
 from application import db, format_datetime
-from datetime import datetime
-from datetime import date
+from datetime import datetime, date
+from application.models.basemodel import BaseModel
 
 
-class Actor(db.Model):
+class Actor(BaseModel):
     __tablename__ = 'actors'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -38,18 +38,5 @@ class Actor(db.Model):
             "image_link": self.image_link
         }
 
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
     def __repr__(self):
         return '<Actor %r>' % self
-
