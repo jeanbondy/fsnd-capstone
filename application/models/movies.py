@@ -2,9 +2,9 @@
 # Imports
 # ----------------------------------------------------------------------------#
 from application import db, format_datetime
+from application.models.basemodel import inheritedClassName
 
-
-class Movie(db.Model):
+class Movie(inheritedClassName):
     __tablename__ = 'movies'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -27,17 +27,6 @@ class Movie(db.Model):
             "imdb_link": self.imdb_link,
             "image_link": self.image_link
         }
-
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
     def __repr__(self):
         return '<Movie %r>' % self
