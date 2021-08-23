@@ -9,7 +9,7 @@ Extend the base Model class to add common methods
 '''
 
 
-class inheritedClassName(db.Model):
+class BaseModel(db.Model):
     __abstract__ = True
 
     def insert(self):
