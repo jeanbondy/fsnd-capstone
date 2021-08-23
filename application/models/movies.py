@@ -2,9 +2,9 @@
 # Imports
 # ----------------------------------------------------------------------------#
 from application import db, format_datetime
-from application.models.basemodel import inheritedClassName
+from application.models.basemodel import BaseModel
 
-class Movie(inheritedClassName):
+class Movie(BaseModel):
     __tablename__ = 'movies'
 
     id = db.Column(db.Integer, primary_key=True)

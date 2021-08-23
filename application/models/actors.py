@@ -1,9 +1,9 @@
 from application import db, format_datetime
 from datetime import datetime, date
-from application.models.basemodel import inheritedClassName
+from application.models.basemodel import BaseModel
 
 
-class Actor(inheritedClassName):
+class Actor(BaseModel):
     __tablename__ = 'actors'
 
     id = db.Column(db.Integer, primary_key=True)
